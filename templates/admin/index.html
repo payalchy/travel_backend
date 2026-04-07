@@ -1,0 +1,85 @@
+{% extends "admin/base_site.html" %}
+
+{% block bodyclass %}{{ block.super }} tm-dashboard-page{% endblock %}
+
+{% block content %}
+<div class="tm-dash-wrap">
+  <div class="tm-dash-header">
+    <div>
+      <h1 class="tm-dash-title">Travel Command Center</h1>
+      <p class="tm-dash-sub">Your default admin home with fast actions and full Django functionality.</p>
+    </div>
+    <a class="tm-dash-button" href="{% url 'admin:password_change' %}">Account Settings</a>
+  </div>
+
+  <div class="tm-dash-stats">
+    <div class="tm-stat-card">
+      <strong>{{ total_destinations }}</strong>
+      <span>Total Destinations</span>
+    </div>
+    <div class="tm-stat-card">
+      <strong>{{ total_packages }}</strong>
+      <span>Total Packages</span>
+    </div>
+    <div class="tm-stat-card">
+      <strong>{{ total_users }}</strong>
+      <span>Total Users</span>
+    </div>
+    <div class="tm-stat-card">
+      <strong>{{ total_bookings }}</strong>
+      <span>Total Bookings</span>
+    </div>
+  </div>
+
+  <div class="tm-dash-grid">
+    <section class="tm-dash-panel">
+      <h2>Recent Activities</h2>
+
+      {% if recent_activities %}
+      <ul class="tm-activity-list">
+        {% for item in recent_activities %}
+        <li>
+          <div class="tm-activity-meta">
+            <span class="tm-activity-label">{{ item.label }}</span>
+            <p>{{ item.detail }}</p>
+          </div>
+          <a class="tm-chip tm-chip-view" href="{{ item.url }}">Open</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <div class="tm-empty-state">No recent activity available yet.</div>
+      {% endif %}
+    </section>
+
+    <aside class="tm-dash-panel">
+      <h2>Modules</h2>
+      <ul class="tm-module-list">
+        {% for module in module_cards %}
+        <li class="tm-module-card">
+          <div class="tm-module-meta">
+            <span class="tm-activity-label">{{ module.title|upper }} MODULE</span>
+            <p>{{ module.count }} records available</p>
+          </div>
+          <div class="tm-module-actions">
+            <a class="tm-chip tm-chip-view" href="{{ module.url }}">Open</a>
+            <a class="tm-chip tm-chip-add" href="{{ module.add_url }}">Add</a>
+          </div>
+        </li>
+        {% endfor %}
+
+        <li class="tm-module-card tm-module-card-actions">
+          <div class="tm-module-meta">
+            <span class="tm-activity-label">ACCOUNT</span>
+            <p>Security and session controls</p>
+          </div>
+          <div class="tm-module-actions">
+            <a class="tm-chip tm-chip-view" href="{% url 'admin:password_change' %}">Password</a>
+            <a class="tm-chip tm-chip-add" href="{% url 'admin:logout' %}">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </aside>
+  </div>
+</div>
+{% endblock %}

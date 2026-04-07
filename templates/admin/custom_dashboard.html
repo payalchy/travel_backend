@@ -1,0 +1,57 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1 style="margin-bottom: 20px;">Travel Dashboard</h1>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px;">
+  <a href="{{ destination_changelist_url }}" style="display:block;padding:16px;background:#1e293b;color:#fff;border-radius:10px;text-decoration:none;">
+    <h3 style="margin:0 0 8px 0;">Total Destinations</h3>
+    <p style="margin:0;font-size:24px;font-weight:600;">{{ total_destinations }}</p>
+  </a>
+
+  <a href="{{ package_changelist_url }}" style="display:block;padding:16px;background:#0f766e;color:#fff;border-radius:10px;text-decoration:none;">
+    <h3 style="margin:0 0 8px 0;">Total Packages</h3>
+    <p style="margin:0;font-size:24px;font-weight:600;">{{ total_packages }}</p>
+  </a>
+
+  <a href="{{ itinerary_changelist_url }}" style="display:block;padding:16px;background:#7c3aed;color:#fff;border-radius:10px;text-decoration:none;">
+    <h3 style="margin:0 0 8px 0;">Total Itineraries</h3>
+    <p style="margin:0;font-size:24px;font-weight:600;">{{ total_itineraries }}</p>
+  </a>
+</div>
+
+<h2 style="margin-bottom:12px;">Recent Travel Packages</h2>
+
+<table style="width:100%;border-collapse:collapse;">
+  <thead>
+    <tr>
+      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Name</th>
+      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Type</th>
+      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Budget</th>
+      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Days</th>
+      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Start</th>
+      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">End</th>
+      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pkg in recent_packages %}
+      <tr>
+        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.name }}</td>
+        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.package_type }}</td>
+        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.budget }}</td>
+        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.days }}</td>
+        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.start_location }}</td>
+        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.end_location }}</td>
+        <td style="padding:10px;border-bottom:1px solid #eee;">
+          <a href="{% url 'admin:recommendation_travelpackage_change' pkg.id %}">Edit</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="7" style="padding:10px;">No packages found.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
