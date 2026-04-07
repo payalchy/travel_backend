@@ -92,6 +92,11 @@ class DestinationAdmin(admin.ModelAdmin):
         "id",
         "destination_summary",
         "province_badge",
+        "culture_score",
+        "adventure_score",
+        "wildlife_score",
+        "sightseeing_score",
+        "history_score",
         "ratings_summary",
         "tags_summary",
         "quick_edit",
@@ -122,6 +127,26 @@ class DestinationAdmin(admin.ModelAdmin):
         filtered = [float(value) for value in values if value is not None]
         average = round(sum(filtered) / len(filtered), 1) if filtered else 0
         return format_html('<span class="tm-admin-rating">{}/5</span>', average)
+
+    @admin.display(description="Culture", ordering="culture")
+    def culture_score(self, obj):
+        return f"{obj.culture:.1f}" if obj.culture is not None else "-"
+
+    @admin.display(description="Adventure", ordering="adventure")
+    def adventure_score(self, obj):
+        return f"{obj.adventure:.1f}" if obj.adventure is not None else "-"
+
+    @admin.display(description="Wildlife", ordering="wildlife")
+    def wildlife_score(self, obj):
+        return f"{obj.wildlife:.1f}" if obj.wildlife is not None else "-"
+
+    @admin.display(description="Sightseeing", ordering="sightseeing")
+    def sightseeing_score(self, obj):
+        return f"{obj.sightseeing:.1f}" if obj.sightseeing is not None else "-"
+
+    @admin.display(description="History", ordering="history")
+    def history_score(self, obj):
+        return f"{obj.history:.1f}" if obj.history is not None else "-"
 
     @admin.display(description="Tags")
     def tags_summary(self, obj):
