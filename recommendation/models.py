@@ -6,6 +6,14 @@ from django.db.models.functions import Lower
 class Destination(models.Model):
     pName = models.CharField(max_length=200)
     province = models.CharField(max_length=50, null=True, blank=True)
+    latitude = models.FloatField(
+        null=True, blank=True,
+        validators=[MinValueValidator(-90), MaxValueValidator(90)]
+    )
+    longitude = models.FloatField(
+        null=True, blank=True,
+        validators=[MinValueValidator(-180), MaxValueValidator(180)]
+    )
 
     culture = models.FloatField(
         null=True, blank=True,
@@ -78,6 +86,7 @@ class TravelPackage(models.Model):
     start_location = models.ForeignKey('Destination',on_delete=models.SET_NULL,null=True,related_name='start_packages')
     end_location = models.ForeignKey('Destination',on_delete=models.SET_NULL,null=True,related_name='end_packages')
     budget = models.FloatField(validators=[MinValueValidator(0)])
+    distance_km = models.FloatField(validators=[MinValueValidator(0)], default=0)
     number_of_travelers = models.IntegerField(validators=[MinValueValidator(1)],default=1)
     image = models.ImageField(upload_to='packages/', validators=[validate_image],null=True, blank=True)
     description = models.TextField(default="")

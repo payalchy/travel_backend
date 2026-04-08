@@ -1,9 +1,14 @@
 from django.contrib import admin
+from django.contrib import messages
 from django.apps import apps
 from django.contrib.auth import get_user_model
-from django.urls import reverse
+from django.shortcuts import redirect
+from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils.text import Truncator
+import json
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 from .models import Destination, TravelPackage, PackageItinerary
 
@@ -106,6 +111,59 @@ class DestinationAdmin(admin.ModelAdmin):
     list_filter = ("province",)
     ordering = ("pName",)
     list_per_page = 50
+    readonly_fields = ("coordinate_tools",)
+
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path(
+                "<int:destination_id>/autofill-coordinates/",
+                self.admin_site.admin_view(self.autofill_coordinates_view),
+                name="recommendation_destination_autofill_coordinates",
+            ),
+        ]
+        return custom_urls + urls
+
+    def autofill_coordinates_view(self, request, destination_id):
+        destination = self.get_object(request, str(destination_id))
+        if destination is None:
+            self.message_user(request, "Destination not found.", level=messages.ERROR)
+            return redirect(reverse("admin:recommendation_destination_changelist"))
+
+        if not destination.pName:
+            self.message_user(request, "Destination name is required for geocoding.", level=messages.ERROR)
+            return redirect(reverse("admin:recommendation_destination_change", args=[destination.id]))
+
+        query = f"{destination.pName}, Nepal"
+        params = urlencode({"q": query, "format": "json", "limit": 1})
+        url = f"https://nominatim.openstreetmap.org/search?{params}"
+        request_obj = Request(url, headers={"User-Agent": "travel-backend-admin/1.0"})
+
+        try:
+            with urlopen(request_obj, timeout=10) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+        except Exception:
+            self.message_user(request, "Could not fetch coordinates right now.", level=messages.ERROR)
+            return redirect(reverse("admin:recommendation_destination_change", args=[destination.id]))
+
+        if not payload:
+            self.message_user(request, "No Nepal location found for this destination.", level=messages.WARNING)
+            return redirect(reverse("admin:recommendation_destination_change", args=[destination.id]))
+
+        first = payload[0]
+        destination.latitude = float(first.get("lat"))
+        destination.longitude = float(first.get("lon"))
+        destination.save(update_fields=["latitude", "longitude"])
+
+        self.message_user(request, "Coordinates updated successfully.", level=messages.SUCCESS)
+        return redirect(reverse("admin:recommendation_destination_change", args=[destination.id]))
+
+    @admin.display(description="Coordinate Tools")
+    def coordinate_tools(self, obj):
+        if obj is None or obj.id is None:
+            return "Save destination first, then use auto-fill."
+        url = reverse("admin:recommendation_destination_autofill_coordinates", args=[obj.id])
+        return format_html('<a class="button" href="{}">Auto Fill Coordinates</a>', url)
 
     @admin.display(description="Destination", ordering="pName")
     def destination_summary(self, obj):
@@ -185,11 +243,17 @@ class TravelPackageAdmin(admin.ModelAdmin):
     inlines = [PackageItineraryInline]
     save_on_top = True
 
+    def get_exclude(self, request, obj=None):
+        # Hide distance_km only on the add form.
+        if obj is None:
+            return ("distance_km",)
+        return super().get_exclude(request, obj)
+
     @admin.display(description="Package")
     def image_preview(self, obj):
         if obj.image:
             return format_html(
-                '<img src="{}" alt="{}" class="tm-admin-thumb"/>',
+                '<img src="{}" alt="{}" class="tm-admin-thumb" style="width: 84px; height: 52px; max-width: 84px; max-height: 52px; object-fit: cover;"/>',
                 obj.image.url,
                 obj.name,
             )

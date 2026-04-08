@@ -1,57 +1,79 @@
 {% extends "admin/base_site.html" %}
 
 {% block content %}
-<h1 style="margin-bottom: 20px;">Travel Dashboard</h1>
+<div class="tm-dashboard">
+  <h1 class="tm-page-title">Dashboard</h1>
+  <div class="tm-dashboard-hero">
+    <div>
+      <h1 class="tm-dashboard-title">Travel Command Center</h1>
+      <p class="tm-dashboard-subtitle">Your default admin home with fast actions and full Django functionality.</p>
+    </div>
+    <a class="tm-dashboard-account" href="{% url 'admin:password_change' %}">Account Settings</a>
+  </div>
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px;">
-  <a href="{{ destination_changelist_url }}" style="display:block;padding:16px;background:#1e293b;color:#fff;border-radius:10px;text-decoration:none;">
-    <h3 style="margin:0 0 8px 0;">Total Destinations</h3>
-    <p style="margin:0;font-size:24px;font-weight:600;">{{ total_destinations }}</p>
-  </a>
+  <div class="tm-stats-grid">
+    <a class="tm-stat-card" href="{{ destination_changelist_url }}">
+      <strong>{{ total_destinations }}</strong>
+      <span>Total Destinations</span>
+    </a>
+    <a class="tm-stat-card" href="{{ package_changelist_url }}">
+      <strong>{{ total_packages }}</strong>
+      <span>Total Packages</span>
+    </a>
+    <a class="tm-stat-card" href="{% url 'admin:auth_user_changelist' %}">
+      <strong>{{ total_users }}</strong>
+      <span>Total Users</span>
+    </a>
+    <a class="tm-stat-card" href="{% url 'admin:index' %}">
+      <strong>{{ total_bookings }}</strong>
+      <span>Total Bookings</span>
+    </a>
+  </div>
 
-  <a href="{{ package_changelist_url }}" style="display:block;padding:16px;background:#0f766e;color:#fff;border-radius:10px;text-decoration:none;">
-    <h3 style="margin:0 0 8px 0;">Total Packages</h3>
-    <p style="margin:0;font-size:24px;font-weight:600;">{{ total_packages }}</p>
-  </a>
+  <div class="tm-dashboard-grid">
+    <section class="tm-panel tm-activity-panel">
+      <h2>Recent Activities</h2>
+      <ul class="tm-activity-list">
+        {% for item in recent_activities %}
+          <li>
+            <span class="tm-activity-dot"></span>
+            <div class="tm-activity-meta">
+              <span class="tm-activity-text">{{ item.label }} - {{ item.detail }}</span>
+            </div>
+            <a href="{{ item.url }}">Open</a>
+          </li>
+        {% empty %}
+          <li class="tm-empty">No recent activities.</li>
+        {% endfor %}
+      </ul>
+    </section>
 
-  <a href="{{ itinerary_changelist_url }}" style="display:block;padding:16px;background:#7c3aed;color:#fff;border-radius:10px;text-decoration:none;">
-    <h3 style="margin:0 0 8px 0;">Total Itineraries</h3>
-    <p style="margin:0;font-size:24px;font-weight:600;">{{ total_itineraries }}</p>
-  </a>
+    <aside class="tm-panel tm-module-panel">
+      <h2>Modules</h2>
+      <div class="tm-module-list">
+        {% for card in module_cards %}
+          <article class="tm-module-card">
+            <div class="tm-module-meta">
+              <span class="tm-module-text">{{ card.title|upper }} MODULE - {{ card.count }} records available</span>
+            </div>
+            <div class="tm-module-links">
+              <a href="{{ card.url }}">Open</a>
+              <a href="{{ card.add_url }}">Add</a>
+            </div>
+          </article>
+        {% endfor %}
+
+        <article class="tm-module-card tm-account-card">
+          <div class="tm-module-meta">
+            <span class="tm-module-text">ACCOUNT - Security and session controls</span>
+          </div>
+          <div class="tm-module-links">
+            <a href="{% url 'admin:password_change' %}">Password</a>
+            <a href="{% url 'admin:logout' %}">Logout</a>
+          </div>
+        </article>
+      </div>
+    </aside>
+  </div>
 </div>
-
-<h2 style="margin-bottom:12px;">Recent Travel Packages</h2>
-
-<table style="width:100%;border-collapse:collapse;">
-  <thead>
-    <tr>
-      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Name</th>
-      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Type</th>
-      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Budget</th>
-      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Days</th>
-      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Start</th>
-      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">End</th>
-      <th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for pkg in recent_packages %}
-      <tr>
-        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.name }}</td>
-        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.package_type }}</td>
-        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.budget }}</td>
-        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.days }}</td>
-        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.start_location }}</td>
-        <td style="padding:10px;border-bottom:1px solid #eee;">{{ pkg.end_location }}</td>
-        <td style="padding:10px;border-bottom:1px solid #eee;">
-          <a href="{% url 'admin:recommendation_travelpackage_change' pkg.id %}">Edit</a>
-        </td>
-      </tr>
-    {% empty %}
-      <tr>
-        <td colspan="7" style="padding:10px;">No packages found.</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
 {% endblock %}

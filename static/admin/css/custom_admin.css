@@ -1,753 +1,518 @@
 :root {
-  --tm-bg: #0e1428;
-  --tm-bg-soft: #16203c;
-  --tm-surface: #1d294a;
-  --tm-border: rgba(209, 221, 255, 0.18);
-  --tm-text: #eaf1ff;
-  --tm-muted: #b8c5e2;
-  --tm-accent: #4dd9b3;
-  --tm-accent-soft: rgba(77, 217, 179, 0.2);
-  --tm-primary: #6ea5ff;
-  --tm-primary-soft: rgba(110, 165, 255, 0.22);
+  --bg-main: #0f1730;
+  --bg-panel: #1a2446;
+  --bg-row: #1c2647;
+  --bg-row-hover: #26335e;
+  --text-main: #eaf2ff;
+  --text-muted: #b8c5e2;
+  --border: rgba(255, 255, 255, 0.14);
+  --accent: #9dd9ff;
+  --button: #1c7f66;
+  --button-hover: #1f9578;
 }
 
-html, body {
+html,
+body {
   font-family: "Manrope", "Segoe UI", Tahoma, sans-serif;
 }
 
 #header {
-  background:
-    radial-gradient(circle at 15% 20%, rgba(77, 217, 179, 0.22), transparent 38%),
-    radial-gradient(circle at 85% 10%, rgba(110, 165, 255, 0.2), transparent 34%),
-    linear-gradient(120deg, #0e1428, #1a2343);
-  color: var(--tm-text);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(120deg, #0e1428, #1a2343);
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border);
 }
 
 #site-name a {
   color: #ffffff;
   font-weight: 800;
-  letter-spacing: 0.2px;
 }
 
 #user-tools,
-#user-tools a {
-  color: var(--tm-muted);
-}
-
-div.breadcrumbs {
-  background: #121a34;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  color: var(--tm-muted);
-}
-
+#user-tools a,
+div.breadcrumbs,
 div.breadcrumbs a {
-  color: #d9e6ff;
+  color: var(--text-muted);
 }
 
 #container {
-  background: linear-gradient(180deg, #0f1730, #131d39 24%, #f5f7fc 24%, #f5f7fc 100%);
+  background: var(--bg-main);
 }
 
-#nav-sidebar {
-  background: linear-gradient(180deg, var(--tm-bg), var(--tm-bg-soft));
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--tm-text);
-}
-
+#nav-sidebar,
 #toggle-nav-sidebar {
-  background: #121b36;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--tm-text);
+  background: var(--bg-main);
+  color: var(--text-main);
+  border-right: 1px solid var(--border);
 }
 
-#nav-filter {
-  margin: 10px;
-  width: calc(100% - 20px);
-  border-radius: 10px;
-  border: 1px solid var(--tm-border);
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--tm-text);
-  padding: 8px 10px;
-}
-
-#nav-filter::placeholder {
-  color: var(--tm-muted);
-}
-
-#nav-sidebar .current-model,
-#nav-sidebar .current-app {
-  background: transparent;
+#nav-sidebar a,
+#nav-sidebar th,
+#nav-sidebar td,
+#nav-sidebar caption {
+  color: var(--text-main);
 }
 
 #nav-sidebar tr[class*="app-"] {
-  margin: 8px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
 }
 
-#nav-sidebar th,
-#nav-sidebar td,
-#nav-sidebar caption,
-#nav-sidebar a {
-  color: var(--tm-text);
+#nav-sidebar tr[class*="app-"],
+#nav-sidebar tr[class*="app-"] th,
+#nav-sidebar tr[class*="app-"] td,
+#nav-sidebar tr[class*="model-"],
+#nav-sidebar tr[class*="model-"] th,
+#nav-sidebar tr[class*="model-"] td,
+#nav-sidebar tr.current-app,
+#nav-sidebar tr.current-app th,
+#nav-sidebar tr.current-app td,
+#nav-sidebar tr.current-model,
+#nav-sidebar tr.current-model th,
+#nav-sidebar tr.current-model td {
+  background: var(--bg-main) !important;
 }
 
-#nav-sidebar caption {
-  background: rgba(255, 255, 255, 0.05);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--tm-muted);
-  padding: 10px 12px;
+#nav-sidebar tr[class*="app-"] th,
+#nav-sidebar tr[class*="app-"] td,
+#nav-sidebar tr[class*="model-"] th,
+#nav-sidebar tr[class*="model-"] td {
+  background: var(--bg-main) !important;
 }
 
 #nav-sidebar tr[class*="model-"] a {
   display: block;
-  border-radius: 10px;
-  padding: 8px 10px;
   margin: 6px;
-  transition: all 0.2s ease;
-  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--text-main) !important;
 }
 
-#nav-sidebar tr[class*="model-"] a:hover {
-  background: var(--tm-primary-soft);
-  color: #ffffff;
+#nav-sidebar li,
+#nav-sidebar li a,
+#nav-sidebar li a:link,
+#nav-sidebar li a:visited,
+#nav-sidebar li a:hover,
+#nav-sidebar li a:active,
+#nav-sidebar li.current-model,
+#nav-sidebar li.current-model a,
+#nav-sidebar li.current-app,
+#nav-sidebar li.current-app a {
+  color: var(--text-main) !important;
 }
 
+#nav-sidebar li.current-model,
+#nav-sidebar li.current-app,
+#nav-sidebar li.current-model a,
+#nav-sidebar li.current-app a {
+  background: transparent !important;
+}
+
+#nav-sidebar tr[class*="model-"] a,
+#nav-sidebar tr[class*="model-"] a:link,
+#nav-sidebar tr[class*="model-"] a:visited,
+#nav-sidebar tr[class*="model-"] a:hover,
+#nav-sidebar tr[class*="model-"] a:active,
+#nav-sidebar .current-model a,
+#nav-sidebar .current-app a {
+  background: var(--bg-main) !important;
+  color: var(--text-main) !important;
+}
+
+#nav-sidebar tr[class*="model-"] a:hover,
 #nav-sidebar .current-model a {
-  background: var(--tm-accent-soft);
-  border: 1px solid rgba(77, 217, 179, 0.45);
-  color: #dcfff5;
-}
-
-#nav-sidebar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.24) transparent;
-}
-
-#nav-sidebar::-webkit-scrollbar {
-  width: 8px;
-}
-
-#nav-sidebar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.22);
-  border-radius: 999px;
-}
-
-#content-main {
-  max-width: 1240px;
-}
-
-.tm-dash-wrap {
-  background:
-    radial-gradient(circle at 14% 0%, rgba(77, 217, 179, 0.17), transparent 38%),
-    radial-gradient(circle at 88% 10%, rgba(110, 165, 255, 0.2), transparent 36%),
-    linear-gradient(155deg, #0d1429, #18254a);
-  color: #edf3ff;
-  border-radius: 18px;
-  box-shadow: 0 18px 50px rgba(7, 13, 30, 0.4);
-  margin-top: 10px;
-  padding: 22px;
-}
-
-.tm-dash-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 18px;
-}
-
-.tm-dash-title {
-  margin: 0;
-  font-size: 34px;
-  line-height: 1.1;
+  background: rgba(110, 165, 255, 0.22);
   color: #ffffff;
-}
-
-.tm-dash-sub {
-  margin: 6px 0 0;
-  color: #becced;
-}
-
-.tm-dash-button {
-  background: linear-gradient(135deg, #36c59f, #1f9779);
-  color: #eafff8;
-  padding: 10px 14px;
-  border-radius: 11px;
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-weight: 700;
-}
-
-.tm-dash-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.tm-stat-card {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 12px;
-  padding: 12px;
-  backdrop-filter: blur(3px);
-}
-
-.tm-stat-card strong {
-  display: block;
-  color: #ffffff;
-  font-size: 26px;
-  line-height: 1.1;
-}
-
-.tm-stat-card span {
-  color: #becced;
-  font-size: 13px;
-}
-
-.tm-dash-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 14px;
-}
-
-.tm-dash-panel {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.tm-dash-panel h2 {
-  margin: 0;
-  padding: 12px 14px;
-  font-size: 17px;
-  color: #ffffff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.tm-activity-list {
-  list-style: none;
-  margin: 0;
-  padding: 8px 10px 12px;
-}
-
-.tm-activity-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-  padding: 10px 11px;
-  background: rgba(255, 255, 255, 0.05);
-  margin-bottom: 8px;
-}
-
-.tm-activity-meta {
-  min-width: 0;
-}
-
-.tm-activity-label {
-  display: inline-block;
-  font-size: 12px;
-  color: #8df0d7;
-  text-transform: uppercase;
-  letter-spacing: 0.45px;
-  margin-bottom: 3px;
-}
-
-.tm-activity-meta p {
-  margin: 0;
-  color: #eaf2ff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.tm-chip {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  margin-right: 6px;
-  margin-bottom: 5px;
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.tm-chip-view {
-  background: rgba(110, 165, 255, 0.2);
-  border-color: rgba(110, 165, 255, 0.45);
-  color: #dce9ff;
-}
-
-.tm-chip-add {
-  background: rgba(77, 217, 179, 0.2);
-  border-color: rgba(77, 217, 179, 0.45);
-  color: #ccfff2;
-}
-
-.tm-chip:hover,
-.tm-dash-button:hover {
-  filter: brightness(1.08);
-}
-
-.tm-module-list {
-  list-style: none;
-  margin: 0;
-  padding: 8px 10px 12px;
-}
-
-.tm-module-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-  padding: 10px 11px;
-  background: rgba(255, 255, 255, 0.05);
-  margin-bottom: 8px;
-}
-
-.tm-module-meta {
-  min-width: 0;
-}
-
-.tm-module-card h3,
-.tm-module-meta p {
-  margin: 0;
-  color: #eaf2ff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.tm-module-actions {
-  flex-shrink: 0;
-}
-
-.tm-module-card-actions .tm-chip {
-  margin-bottom: 0;
-}
-
-.tm-empty-state {
-  padding: 14px;
-  color: #becced;
 }
 
 .module h2,
 .module caption,
 .inline-group h2 {
-  background: #1b2750;
+  background: var(--bg-panel);
+  color: var(--text-main);
 }
 
 .button,
+a.button,
 input[type=submit],
 input[type=button],
-.submit-row input,
-a.button {
-  background: #1c7f66;
-  border-color: #1c7f66;
+.submit-row input {
+  background: var(--button);
+  border-color: var(--button);
+  color: #eafff8;
 }
 
 .button:hover,
+a.button:hover,
 input[type=submit]:hover,
 input[type=button]:hover,
-.submit-row input:hover,
-a.button:hover {
-  background: #1f9578;
-  border-color: #1f9578;
+.submit-row input:hover {
+  background: var(--button-hover);
+  border-color: var(--button-hover);
 }
 
-.change-list #changelist {
-  background: transparent;
-  border: 0;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+.change-list #content,
+.change-list #content-main,
+.change-list #changelist,
+.change-list #changelist-form,
+.change-list #changelist table,
+.change-list #changelist td,
+.change-list #changelist th {
+  background: var(--bg-main) !important;
+  color: var(--text-main) !important;
 }
 
-.change-list #changelist #toolbar {
-  background: #eef4ff;
-  border: 1px solid #d4e1fb;
-  border-radius: 12px 12px 0 0;
-  padding: 10px 12px;
-}
-
-.change-list #changelist #toolbar input[type="text"] {
-  border: 1px solid #b8c9eb;
-  border-radius: 9px;
-  background: #ffffff;
-  color: #1b2a4a;
-}
-
-.change-list #changelist #toolbar input[type="submit"] {
-  border-radius: 9px;
-  padding: 8px 14px;
-}
-
-.change-list #changelist table thead th {
-  background: #1f2d5a;
-  color: #eaf2ff;
-  border-bottom: 1px solid #2d3e70;
-  font-weight: 700;
+.change-list #changelist #toolbar,
+.change-list .actions,
+.change-list .paginator,
+.change-list #changelist-filter {
+  background: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border) !important;
 }
 
 .change-list #changelist table {
-  border: 1px solid #d8e4fa;
-  border-top: 0;
-  background: #ffffff;
+  border: 1px solid var(--border) !important;
 }
 
-.change-list #changelist table tbody tr {
-  background: #ffffff;
-  color: #203050;
+.change-list #changelist table thead th {
+  background: #202f5f !important;
+  color: var(--text-main) !important;
+  border-bottom: 1px solid var(--border) !important;
 }
 
-.change-list #changelist table tbody tr:nth-child(even) {
-  background: #f7faff;
+.change-list #changelist table tbody tr,
+.change-list #changelist table tbody tr:nth-child(odd),
+.change-list #changelist table tbody tr:nth-child(even),
+.change-list #changelist table tbody tr.selected {
+  background: var(--bg-row) !important;
+}
+
+.change-list #changelist table tbody tr td,
+.change-list #changelist table tbody tr th,
+.change-list #result_list tr.row1 td,
+.change-list #result_list tr.row1 th,
+.change-list #result_list tr.row2 td,
+.change-list #result_list tr.row2 th {
+  background: var(--bg-row) !important;
 }
 
 .change-list #changelist table tbody tr:hover {
-  background: #eaf2ff;
-}
-
-.change-list #toolbar,
-.change-list .actions {
-  background: #eef4ff;
-  border-bottom: 1px solid #d4e1fb;
-}
-
-.change-list .actions {
-  border-left: 1px solid #d8e4fa;
-  border-right: 1px solid #d8e4fa;
-  color: #2a3b60;
-}
-
-.change-list .actions select,
-.change-list .actions button,
-.change-list .actions input,
-.change-list #changelist-search input,
-.change-list #changelist-search button {
-  border-radius: 8px;
+  background: var(--bg-row-hover) !important;
 }
 
 .change-list #changelist table tbody td,
 .change-list #changelist table tbody th,
 .change-list #changelist table tbody td a,
-.change-list #changelist table tbody th a {
-  color: #1f2f50;
-}
-
-.change-list #changelist table tbody td a,
-.change-list #changelist table tbody th a {
-  text-decoration: none;
-}
-
-.change-list #changelist table tbody td a:hover,
-.change-list #changelist table tbody th a:hover {
-  color: #144aa3;
-  text-decoration: underline;
-}
-
-.change-list .paginator {
-  background: #eef4ff;
-  border: 1px solid #d8e4fa;
-  border-top: 0;
-  border-radius: 0 0 12px 12px;
-  color: #2a3b60;
-}
-
-.change-list #changelist-filter {
-  background: #121a34;
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
-}
-
+.change-list #changelist table tbody th a,
 .change-list #changelist-filter h2,
 .change-list #changelist-filter h3,
 .change-list #changelist-filter a,
 .change-list #changelist-filter li,
-.change-list #changelist-filter details,
-.change-list #changelist-filter summary {
-  color: #e7efff;
+.change-list .paginator a {
+  color: var(--text-main) !important;
 }
 
-.change-list #changelist-filter h2 {
-  background: #1f2d5a;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+.change-list #changelist table tbody td a:hover,
+.change-list #changelist table tbody th a:hover,
+.change-list .paginator a:hover {
+  color: var(--accent) !important;
 }
 
-.change-list #changelist-filter li.selected a {
-  color: #8df0d7;
-  font-weight: 700;
-}
-
-body.app-recommendation.model-destination.change-list #changelist,
-body.app-recommendation.model-travelpackage.change-list #changelist {
-  box-shadow: none;
-}
-
-body.app-recommendation.model-destination.change-list #content,
-body.app-recommendation.model-destination.change-list #content-main,
-body.app-recommendation.model-travelpackage.change-list #content,
-body.app-recommendation.model-travelpackage.change-list #content-main {
-  background: #121a34;
-  color: #eaf2ff;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist #toolbar,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist #toolbar {
-  background: #1a2446;
-  border-color: rgba(255, 255, 255, 0.14);
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist table,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table {
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: #0f1630;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist table thead th,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table thead th {
-  background: #202f5f;
-  color: #eef4ff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody tr,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody tr {
-  background: #212b4c;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody tr:nth-child(even),
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody tr:nth-child(even) {
-  background: #192240;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody tr:hover,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody tr:hover {
-  background: #2a3764;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody td,
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody th,
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody td a,
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody th a,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody td,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody th,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody td a,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody th a {
-  color: #e9f0ff !important;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody td *,
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody th *,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody td *,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody th * {
-  color: inherit !important;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody td a:hover,
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody th a:hover,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody td a:hover,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody th a:hover {
-  color: #9dd9ff;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody td,
-body.app-recommendation.model-destination.change-list .change-list #changelist table tbody th,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody td,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist table tbody th {
-  opacity: 1 !important;
-}
-
-body.app-recommendation.model-destination.change-list .change-list .actions,
-body.app-recommendation.model-travelpackage.change-list .change-list .actions {
-  color: #e9f0ff;
-  background: #1a2446;
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-body.app-recommendation.model-destination.change-list .change-list .actions select,
-body.app-recommendation.model-destination.change-list .change-list .actions input,
-body.app-recommendation.model-travelpackage.change-list .change-list .actions select,
-body.app-recommendation.model-travelpackage.change-list .change-list .actions input {
+.change-list #changelist-search input,
+.change-list #changelist-search button,
+.change-list .actions select,
+.change-list .actions input,
+.change-list .actions button,
+#nav-filter {
   background: #111a35;
-  color: #eaf2ff;
+  color: var(--text-main);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-body.app-recommendation.model-destination.change-list .change-list #changelist-search input,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist-search input {
-  background: #111a35 !important;
-  color: #eaf2ff !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist-search input[type="submit"],
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist-search input[type="submit"] {
-  background: #1f2d5a !important;
-  color: #eaf2ff !important;
-  border: 1px solid #3c538f !important;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist-filter,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist-filter {
-  background: #121a34;
-}
-
-body.app-recommendation.model-destination.change-list .change-list .paginator,
-body.app-recommendation.model-travelpackage.change-list .change-list .paginator {
-  background: #1a2446;
-  border-color: rgba(255, 255, 255, 0.14);
-  color: #e9f0ff;
-}
-
-body.app-recommendation.model-destination.change-list .change-list .paginator a,
-body.app-recommendation.model-travelpackage.change-list .change-list .paginator a {
-  color: #9dd9ff;
-}
-
-body.app-recommendation.model-destination.change-list .change-list #changelist-filter h2,
-body.app-recommendation.model-destination.change-list .change-list #changelist-filter h3,
-body.app-recommendation.model-destination.change-list .change-list #changelist-filter li,
-body.app-recommendation.model-destination.change-list .change-list #changelist-filter a,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist-filter h2,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist-filter h3,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist-filter li,
-body.app-recommendation.model-travelpackage.change-list .change-list #changelist-filter a {
-  color: #e9f0ff !important;
-}
-
-body.app-recommendation.model-destination.change-list .tm-admin-title,
-body.app-recommendation.model-travelpackage.change-list .tm-admin-title {
-  color: #1c2a4a !important;
-}
-
-body.app-recommendation.model-destination.change-list .tm-admin-sub,
-body.app-recommendation.model-travelpackage.change-list .tm-admin-sub {
-  color: #5a6f97 !important;
-}
-
-body.app-recommendation.model-destination.change-list .tm-admin-badge,
-body.app-recommendation.model-travelpackage.change-list .tm-admin-badge {
-  color: #1f3a73 !important;
-  background: #d4e2ff !important;
-  border-color: #9eb8ef !important;
-}
-
-body.app-recommendation.model-destination.change-list .tm-admin-edit-btn,
-body.app-recommendation.model-travelpackage.change-list .tm-admin-edit-btn {
-  color: #1f3a73 !important;
-  background: #d4e2ff !important;
-  border-color: #9eb8ef !important;
-}
-
-body.app-recommendation.model-destination.change-list .tm-admin-rating,
-body.app-recommendation.model-travelpackage.change-list .tm-admin-rating {
-  color: #2f9f86 !important;
-}
-
 .tm-admin-title {
+  color: var(--text-main);
   font-size: 14px;
   font-weight: 700;
-  line-height: 1.25;
-  color: #f3f7ff;
 }
 
 .tm-admin-sub {
+  color: var(--text-muted);
   font-size: 12px;
-  color: #b7c6e7;
-  margin-top: 2px;
+}
+
+.tm-admin-badge,
+.tm-admin-edit-btn {
+  background: #dce8ff;
+  border: 1px solid #9fb8ef;
+  color: #173670;
+  border-radius: 999px;
 }
 
 .tm-admin-badge {
   display: inline-block;
   padding: 4px 10px;
-  border-radius: 999px;
   font-size: 12px;
-  background: rgba(110, 165, 255, 0.24);
-  border: 1px solid rgba(110, 165, 255, 0.4);
-  color: #dce9ff;
-}
-
-.tm-admin-rating {
-  display: inline-block;
-  font-weight: 700;
-  color: #8df0d7;
-}
-
-.tm-admin-thumb {
-  width: 132px;
-  height: 74px;
-  object-fit: cover;
-  border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.tm-admin-thumb-empty {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.12);
-  color: #d8e6ff;
-  font-size: 11px;
 }
 
 .tm-admin-edit-btn {
   display: inline-block;
   padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(110, 165, 255, 0.2);
-  border: 1px solid rgba(110, 165, 255, 0.45);
-  color: #dce9ff;
   text-decoration: none;
 }
 
-.tm-admin-edit-btn:hover {
-  filter: brightness(1.1);
+.change-list #changelist table tbody td .tm-admin-edit-btn {
+  background: #dce8ff !important;
+  border-color: #9fb8ef !important;
+  color: #173670 !important;
+}
+
+.tm-admin-rating {
+  color: #8df0d7;
+  font-weight: 700;
+}
+
+.tm-admin-thumb {
+  width: 132px;
+  height: 74px;
+  border-radius: 9px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+/* Keep package preview image small in changelist table. */
+.change-list td.field-image_preview img,
+.change-list th.field-image_preview img,
+.change-list img.tm-admin-thumb {
+  width: 96px !important;
+  height: 56px !important;
+  max-width: 96px !important;
+  max-height: 56px !important;
+  object-fit: cover !important;
+  display: block;
+}
+
+.tm-admin-thumb-empty {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+}
+
+.tm-dashboard {
+  padding: 8px 0 24px;
+}
+
+.tm-dashboard-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  background: linear-gradient(180deg, #121a35, #141d3a);
+  border-radius: 18px;
+  padding: 18px 18px 14px;
+  margin-bottom: 16px;
+}
+
+.tm-dashboard-title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.tm-dashboard-subtitle {
+  margin: 12px 0 0;
+  color: var(--text-muted);
+}
+
+.tm-dashboard-account {
+  background: #22415a;
+  color: var(--text-main);
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.tm-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.tm-stat-card {
+  background: #2a314e;
+  border-radius: 12px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.tm-stat-card strong {
+  display: inline-block;
+  font-size: 22px;
+  margin-right: 6px;
+}
+
+.tm-stat-card span {
+  font-size: 13px;
+}
+
+.tm-dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+}
+
+.tm-panel {
+  background: #2b3150;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.tm-panel h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.tm-activity-list,
+.tm-module-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tm-activity-list li,
+.tm-module-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.tm-activity-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tm-activity-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--text-main);
+  border-radius: 999px;
+  margin-top: 8px;
+  flex: 0 0 auto;
+}
+
+.tm-activity-meta,
+.tm-module-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.tm-activity-text,
+.tm-module-text {
+  display: block;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tm-activity-list a,
+.tm-module-links a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.tm-module-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 0;
+  flex: 0 0 auto;
+}
+
+.tm-empty {
+  color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+  .tm-dashboard-hero,
+  .tm-dashboard-grid {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .tm-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .tm-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tm-dashboard-title {
+    font-size: 24px;
+  }
+
+  .tm-dashboard-account {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 @media (max-width: 1024px) {
   #container {
-    background: #f5f7fc;
-  }
-
-  .tm-dash-grid {
-    grid-template-columns: 1fr;
+    background: var(--bg-main);
   }
 }
 
-@media (max-width: 720px) {
-  .tm-dash-wrap {
-    padding: 14px;
+/* Dashboard consistency overrides */
+.tm-dashboard,
+.tm-dashboard * {
+  color: var(--text-main);
+}
+
+.tm-dashboard-title,
+.tm-panel h2,
+.tm-stat-card strong,
+.tm-stat-card span,
+.tm-activity-list strong,
+.tm-module-card strong {
+  color: #ffffff !important;
+}
+
+.tm-dashboard-subtitle,
+.tm-empty {
+  color: var(--text-muted) !important;
+}
+
+.tm-stats-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.tm-dashboard-grid {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr !important;
+}
+
+.tm-panel {
+  min-height: 100%;
+}
+
+.tm-module-panel {
+  display: block !important;
+}
+
+@media (max-width: 900px) {
+  .tm-dashboard-grid {
+    grid-template-columns: 1fr !important;
   }
 
-  .tm-dash-title {
-    font-size: 26px;
-  }
-
-  .tm-dash-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .tm-activity-list li {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .tm-module-card {
-    align-items: flex-start;
-    flex-direction: column;
+  .tm-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
